@@ -10,6 +10,7 @@ const Allcategories = () => {
       <div className="d-flex justify-content-around">
         <h4>All Categories</h4>
         <button
+          style={{width:'53.58px', height:'46.78px'}}
           onClick={handleShow}
           className="btn btn-warning rounded-circle fw-semibold ms-2"
         >

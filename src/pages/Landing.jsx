@@ -15,7 +15,7 @@ const Landing = () => {
           <h3>
             Welcome to <span className="text-info">Media Player</span>
           </h3>
-          <p style={{ textAlign: "justify" }} className="mt-2">
+          <p style={{ textAlign: "justify" }} className="mt-2 text-dark">
             Media Player App will allow user to add or remove their uploaded
             videos from youTube and also allow them to arrange it in different
             categories by drag and drop. User can also have the provision to
