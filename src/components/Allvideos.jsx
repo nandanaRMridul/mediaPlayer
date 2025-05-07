@@ -1,25 +1,38 @@
-import React from 'react'
-import { Card } from 'react-bootstrap';
-import musicManage from "../assets/manage-music.jpg";
+import React, { useState } from 'react'
+import VideoCard from './VideoCard';
+import { Col, Row } from 'react-bootstrap';
+import { getVideoApi } from '../services/allApi';
+import { useEffect } from 'react';
 
 const Allvideos = () => {
+const [videosData, setVideosData] = useState([])
+
+  useEffect(() => {
+    getVideos()
+  }, [])
+
+  const getVideos = async () => {
+    let result = await getVideoApi() 
+    if (result.status >= 200 && result.status <= 300) {
+      setVideosData(result.data)
+    }
+    else {
+      alert("Error fetching video data");
+    }
+    console.log(result);
+  }
+
   return (
     <>
       <h4>All Videos</h4>
-      <div className="row">
-        <div className="col-lg-4">
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={musicManage} />
-            <Card.Body>
-              <div className="d-flex align-items-center justify-content-between">
-                <h6>Title</h6>{" "}
-                <button className='btn'><i className="fa-solid fa-trash text-danger"></i></button>
-              </div>
-            </Card.Body>
-          </Card>
-        </div>
-        <div className="col-lg-4"></div>
-      </div>
+      <Row className='g-4'>
+        {videosData?.map((eachVideos, index) => (
+          <Col key={index} lg={4} md={6} sm={12}>
+            <VideoCard videos={eachVideos} />{" "}
+            {/* sending videos as props (video) */}
+          </Col>
+        ))}
+      </Row>
     </>
   );
 }

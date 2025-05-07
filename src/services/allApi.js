@@ -6,3 +6,8 @@ import CommonApi from "./CommonApi";
 export const uploadVideoApi = async (videoData) => {
   return await CommonApi("post", "/allVideos", videoData);
 };
+
+//get video api, this fn is called in AllVideos component
+export const getVideoApi = async () => {
+  return await CommonApi("get", "/allVideos", "");
+};

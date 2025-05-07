@@ -11,16 +11,26 @@ const Add = () => {
     youtubeLink: "",
   })
 
+  const [invalidYoutubeLink, setInvalidYoutubeLink] = useState(false)
+
   const addVideo = async() => {
     console.log(videoDetails);
-    
-    let result = await uploadVideoApi(videoDetails);
-    console.log(result);
-    if (result.status >= 200 && result.status <= 300) {
-      alert("Successfully added your video")
-      handleClose()
+    if (videoDetails.caption && videoDetails.imageURL && videoDetails.youtubeLink) {
+       let result = await uploadVideoApi(videoDetails);
+       console.log(result);
+       if (result.status >= 200 && result.status <= 300) {
+         alert("Successfully added your video");
+         handleClose();
+      }
+       else {
+         alert("Something went wrong. Please contact admin")
+      }
+       console.log(result);
     }
-console.log(result);
+    else {
+      alert("Please fill the form") //alerts if add button is clicked without filling form
+    }
+   
   }
 
   const convertToId = (videoURL) => {
@@ -33,7 +43,7 @@ console.log(result);
       })
     }
     else {
-      console.error("Invalid youtube link");
+      setInvalidYoutubeLink(true);
     }
   };
 
@@ -84,13 +94,14 @@ console.log(result);
             >
               <Form.Control onChange={(e) => convertToId(e.target.value)} type="text" placeholder="Video YouTube Link" />
             </FloatingLabel>
+            {invalidYoutubeLink?(<span className='text-danger fw-semibold'>Invalid Youtube Link</span>):("")}
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button onClick={addVideo} variant="primary">Add</Button>
+          <Button disabled={invalidYoutubeLink} onClick={addVideo} variant="primary">Add</Button>
         </Modal.Footer>
       </Modal>
     </>
