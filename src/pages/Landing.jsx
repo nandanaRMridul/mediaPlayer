@@ -18,9 +18,9 @@ const Landing = () => {
           <p style={{ textAlign: "justify" }} className="mt-2 text-dark">
             Media Player App will allow user to add or remove their uploaded
             videos from youTube and also allow them to arrange it in different
-            categories by drag and drop. User can also have the provision to
-            manage their watch history as well. What are you waiting for, let
-            starts exploring our site!!!
+            categories by drag and drop. User also has the provision to
+            manage their watch history as well. What are you waiting for, let's
+            start exploring our site!!!
           </p>
           <Link className="btn btn-outline-primary" to={"/home"}>
             Get Started

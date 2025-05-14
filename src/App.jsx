@@ -1,4 +1,3 @@
-import './App.css'
 import Landing from './pages/Landing'
 import Home from './pages/Home'
 import History from './pages/History'

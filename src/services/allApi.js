@@ -13,5 +13,25 @@ export const getVideoApi = async () => {
 };
 
 export const addHistory = async (historyData) => {
-  return await CommonApi("post", "/allHistory", historyData)
+  return await CommonApi("post", "/allHistory", historyData);
 };
+
+export const getHistoryApi = async () => {
+  return await CommonApi("get", "/allHistory", "")
+};
+
+export const deleteHistoryApi = async (id) => {
+  return await CommonApi('delete', `/allHistory/${id}`, {});
+};
+
+export const deleteVideoApi = async (id) => {
+  return await CommonApi("delete", `/allVideos/${id}`, {});
+}
+
+export const addCategoryApi = async (category) => {
+  return await CommonApi("post", "/allCategories", category)
+}
+
+export const getCategoryApi = async () => {
+  return await CommonApi("get", "/allCategories", " ");
+}

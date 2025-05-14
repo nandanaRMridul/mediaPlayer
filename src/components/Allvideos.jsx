@@ -6,10 +6,12 @@ import { useEffect } from 'react';
 
 const Allvideos = ({ addVideoResponse }) => {
   const [videosData, setVideosData] = useState([]);
+  const [deleteVideoRes, setDeleteVideoRes] = useState([]);
+
   console.log(addVideoResponse);
   useEffect(() => {
     getVideos();
-  }, [addVideoResponse]);
+  }, [addVideoResponse, deleteVideoRes]);
 
   const getVideos = async () => {
     let result = await getVideoApi();
@@ -29,7 +31,7 @@ const Allvideos = ({ addVideoResponse }) => {
           <Col key={index} lg={4} md={6} sm={12}>
             {" "}
             {/* to identify each col uniquely add their index as key*/}
-            <VideoCard videos={eachVideos} />{" "}
+            <VideoCard videos={eachVideos} setDeleteVideoRes={setDeleteVideoRes} />{" "}
             {/* sending videos as props (video) */}
           </Col>
         ))}

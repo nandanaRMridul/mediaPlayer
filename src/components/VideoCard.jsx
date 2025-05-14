@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Modal } from "react-bootstrap";
 import { addHistory } from "../services/allApi";
+import { deleteVideoApi } from "../services/allApi";
 
-
-
-const VideoCard = ({ videos }) => {
+const VideoCard = ({ videos, setDeleteVideoRes }) => {
   const [show, setShow] = useState(false);
+
+  const deleteVideo = async (id) => {
+    let result = await deleteVideoApi(id);
+    setDeleteVideoRes(result);
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = async () => {
-    const currentDate = new Date()
-    const caption = videos.caption
-    const link = videos.youtubeLink
+    const currentDate = new Date();
+    const caption = videos.caption;
+    const link = videos.youtubeLink;
 
-    const reqObject = { //data sent to allHistory only when the video is opened in modal since it's defined in handleShow()
+    const reqObject = {
+      //data sent to allHistory only when the video is opened in modal since it's defined in handleShow()
       currentDate,
       caption,
       link,
@@ -22,7 +27,7 @@ const VideoCard = ({ videos }) => {
     let result = await addHistory(reqObject);
 
     console.log(result);
-    setShow(true)
+    setShow(true);
   };
 
   console.log(videos);
@@ -41,7 +46,7 @@ const VideoCard = ({ videos }) => {
         <Card.Body>
           <div className="d-flex align-items-center justify-content-between">
             <h6>{videos?.caption}</h6>{" "}
-            <button className="btn">
+            <button onClick={() => deleteVideo(videos?.id)} className="btn">
               <i className="fa-solid fa-trash text-danger"></i>
             </button>
           </div>
